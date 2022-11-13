@@ -1,0 +1,20 @@
+﻿@page
+@model TestSENG.Pages.Accounts.NotFoundACModel
+@{
+}
+
+<style>
+    body {
+        background-color: black;
+    }
+</style>
+<div class="text-center">
+    <h1 style="font-size:120px;color:red" class="display-4">404</h1>
+
+    <p style="font-size:120px;color:red">The Bank Account does not exist or Your Balance is not enough</p>
+
+    <p style="font-size: 20px; color: red">
+    </p>
+    <a asp-page="./Account_Setting" asp-route-id="@Model.idAcccout" class="btn btn-primary">BACK TO THE ACCOUNT</a>
+
+</div>

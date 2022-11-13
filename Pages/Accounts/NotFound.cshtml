@@ -1,0 +1,21 @@
+﻿@page
+@model TestSENG.Pages.Accounts.NotFoundModel
+@{
+}
+
+
+<style>
+    body {
+        background-color: black;
+    }
+</style>
+<div class="text-center">
+    <h1 style="font-size:120px;color:red" class="display-4">404</h1>
+
+
+    <p style="font-size: 20px; color: red">
+        We're fairly sure that page used to be here, but seems to have gone missing. We do apologise on it's behalf
+    </p>
+    <a asp-page="./Account_Setting" asp-route-id="@Model.idAcccout" class="btn btn-primary">BACK TO THE ACCOUNT</a>
+
+</div>

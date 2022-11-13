@@ -1,0 +1,83 @@
+@page 
+@model TestSENG.Pages.Accounts.IndexModel
+
+@{
+    ViewData["Title"] = "Account Information<";
+}
+
+<h1>Account Information</h1>
+
+<p>
+    <a asp-page="Create" asp-route-id="@Model.CustomerID">Create New Account</a>
+</p>
+<div>
+    <h4>Customer Information</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Customer.FirstName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Customer.FirstName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Customer.LastName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Customer.LastName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Customer.DateIssue)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Customer.DateIssue)
+        </dd>
+
+    </dl>
+    <hr />
+</div>
+<table class="table">
+            <thead>
+                <tr>
+                    <th>IBAN</th>
+                    <th>Balance</th>
+                    <th>DateIssue</th>
+                    <th>ID_Customer</th>
+                    <th></th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var item in Model.AccountData.Account)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.IBAN)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Balance)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DateIssue)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ID_Customer)
+                        </td>
+                        <td>
+                            <!--...<a asp-page="./Edit" asp-route-id="@item.ID_Account">Edit</a> |-->
+                            <a asp-page="./Details" asp-route-id="@item.ID_Account">Details</a> |
+                            <a asp-page="./Delete" asp-route-id="@item.ID_Account">Delete</a>|
+                            <a asp-page="./Account_Setting" asp-route-id="@item.ID_Account">Account Settings</a>
+
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+<div>
+    <!--<a asp-page="./Edit" asp-route-id="model.Account.ID_Customer">Edit</a> |-->
+    <a asp-page="../Customers/Index"
+       class="btn btn-primary">
+        Back to Customer Information
+    </a>
+</div>

@@ -1,0 +1,65 @@
+@page
+@model TestSENG.Pages.Accounts.CreateModel
+
+@addTagHelper*, Microsoft.AspNetCore.Mvc.TagHelpers
+@using TestSENG.Models;
+@Model Account
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+
+<style>
+    .field-validation-error {
+        color: red
+    }
+
+    .validation-summary-errors {
+        color: red
+    }
+</style>
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.6.2.js">
+</script>
+<script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.8.1/jquery.validate.js">
+</script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js">
+</script>
+
+<h1>Create</h1>
+
+<h4>Account</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post" asp-controller="account">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Account.IBAN" class="control-label"></label>
+                <input asp-for="Account.IBAN"  class="form-control" />
+                <span asp-validation-for="Account.IBAN" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Account.Balance" class="control-label"></label>
+                <input asp-for="Account.Balance" class="form-control" />
+                <span asp-validation-for="Account.Balance" class="text-danger"></span>
+            </div>
+            
+
+            <div class="form-group">
+                <input type="hidden" asp-for="Account.ID_Customer" value="@Model.CustomerID">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index" asp-route-id="Account.ID_Customer" class="btn btn-danger">Back to Bank Account</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+
+}

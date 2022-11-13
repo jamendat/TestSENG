@@ -1,0 +1,103 @@
+@page
+@model TestSENG.Pages.Customers.IndexModel
+
+@{
+    ViewData["Title"] = "Customer";
+}
+
+<h1>Customer</h1>
+
+<p>
+    <a asp-page="Create">Create A New Customer</a>
+</p>
+<form asp-page="./Index" method="get">
+    <div class="form-actions no-color">
+        <p>
+            Find by name, ID card and Telephone No.:
+            <input type="text" name="SearchString" value="@Model.CurrentFilter" style="width: 50%"/>
+            <input type="submit" value="Search" class="btn btn-primary" /> |
+            <a asp-page="./Index">Back to full List</a>
+        </p>
+    </div>
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <a asp-page="./Index" asp-route-sortOrder="@Model.NameSort"
+                   asp-route-currentFilter="@Model.CurrentFilter">
+                    @Html.DisplayNameFor(model => model.Customer[0].FirstName)
+                </a>
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Customer[0].LastName)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Customer[0].IDCardNo)
+            </th>
+            
+            <th>
+                @Html.DisplayNameFor(model => model.Customer[0].Telephone)
+            </th>
+            <th>
+                <a asp-page="./Index" asp-route-sortOrder="@Model.DateSort"
+                   asp-route-currentFilter="@Model.CurrentFilter">
+                    @Html.DisplayNameFor(model => model.Customer[0].DateIssue)
+                </a>
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Customer)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastName)
+                </td>
+                
+                <th>
+                    @Html.DisplayFor(modelItem => item.IDCardNo)
+                </th>
+
+                
+                <th>
+                    @Html.DisplayFor(modelItem => item.Telephone)
+                </th>
+                <th>
+                    @Html.DisplayFor(modelItem => item.DateIssue)
+                </th>
+               
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.ID_Customer">Edit</a> |
+                    <a asp-page="./Details" asp-route-id="@item.ID_Customer">Details</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.ID_Customer">Delete</a>|
+                    <a asp-page="../Accounts/Index" asp-route-id="@item.ID_Customer">Account Settings</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@{
+    var prevDisabled = !Model.Customer.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.Customer.HasNextPage ? "disabled" : "";
+}
+
+<a asp-page="./Index"
+   asp-route-sortOrder="@Model.CurrentSort"
+   asp-route-pageIndex="@(Model.Customer.PageIndex - 1)"
+   asp-route-currentFilter="@Model.CurrentFilter"
+   class="btn btn-primary @prevDisabled">
+    Previous
+</a>
+<a asp-page="./Index"
+   asp-route-sortOrder="@Model.CurrentSort"
+   asp-route-pageIndex="@(Model.Customer.PageIndex + 1)"
+   asp-route-currentFilter="@Model.CurrentFilter"
+   class="btn btn-primary @nextDisabled">
+    Next
+</a>
